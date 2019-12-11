@@ -75,8 +75,27 @@ Person.prototype.toString = function() {
 */
 
 function Car(model, milesPerGallon) {
-
+  this.model = model;
+  this.milesPerGallon = milesPerGallon;
+  this.tank = 0;
+  this.odometer = 0;
 };
+
+Car.prototype.fill = function(gallons) {
+  return (this.tank += gallons);
+};
+
+Car.prototype.drive = function(distance) {
+  this.odometer += distance;
+  this.tank = this.tank - (distance/ this.milesPerGallon);
+
+  if(this.tank <= 0) {
+    this.odometer = this.odometer + (this.tank*this.milesPerGallon);
+    this.tank = 0;
+    return `I ran out of fuel at ${this.odometer} miles!`;
+  }
+
+}
 
 /*
   TASK 3
@@ -103,10 +122,10 @@ Baby.prototype.play = function() {
   TASK 4
 
   In your own words explain the four principles for the "this" keyword below:
-  1. 
-  2. 
-  3. 
-  4. 
+  1. When this is used in global scope it refers to window object.
+  2. Implicit Binding is when this is called on an object and will refer to the object that is named left to the .
+  3. New binding this will refer to a new object created with constructor function
+  4. Explicit binding when we use call() or apply() method we define to which object this will refer.
 */
 
 
